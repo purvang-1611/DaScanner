@@ -12,17 +12,43 @@ router.get("/",function(req,res,next){
     });
 });
 
-router.post("/updatestock",function(req,res,next){
-    //let newdata=new inventorytb(req.body);
-    console.log(req);
-    
-    //console.log(newdata);
-    /*inventorytb.insertMany(req.body,function(err,record){
+
+router.post("/",function(req,res,next){
+    console.log(req.body);
+    //add new stock
+    const data=new inventorytb({
+        name:req.body.itemName,
+        NumberOfItems:req.body.totalQuantity,
+        NumberOfAvailable:req.body.availableQuantity
+    });
+   data.save(function(err,result){
         if(err)
             return res.send(err);
-        else
-            return res.json(record);
-    });*/
+        else{
+            //redirect to the page with updated data.
+            res.redirect('/inventory');
+    }
+    });
+});
+router.post("/updatestock",function(req,res,next){
+    //console.log(req);
+    //update stock
+
+    inventorytb.updateOne({_id:req.body.equipmentID},{$inc:{NumberOfAvailable:req.body.quantity,NumberOfItems:req.body.quantity}},function(err,result){
+        if(err)
+            return res.send(err);
+        else{
+            res.redirect('/inventory');
+            //redirect to the page with updated data.
+        // inventorytb.find(function(err,inventoryrecord){
+        //     if(err){
+        //         return res.send(err);
+        //     }
+        //     console.log(inventoryrecord);
+        //     res.render('inventory_detail',{data:{stock:inventoryrecord}});
+        // });
+    }
+    });
 });
 
 router.put('/:id',function(req,res,next){

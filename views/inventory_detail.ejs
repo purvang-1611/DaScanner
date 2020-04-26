@@ -99,7 +99,7 @@
 
         <head>
             <link rel="stylesheet" type="text/css" href="/stylesheets/homepageSAC.css"></link>
-            <script type="text/javascript" src="/javascripts/homepageSAC.js"></script>
+            <script type="text/javascript" src="/javascripts/inventory.js"></script>
         </head>
         <body>
         <nav class="n1">
@@ -132,16 +132,21 @@
             <tr>
                 <td><label class="sel1">Type of equipment: </label></td>
                 <td>
-                    <input type="text" class="sel" name="itemName" id="itemname">
+                    <input type="text" class="sel" name="itemName" id="itemName">
                 </td>
             </tr>
             <tr></tr>
             <tr>
                 <td><label class="qty">Quantity: </label></td>
-                <td><input type="number" class="qty1" id="qty1" onkeyup="validateForm()" required name="quantity"></td>
+                <td><input type="number" class="qty1" id="qty1" onkeyup="validateForm()" required name="totalQuantity"></td>
             </tr>
                 <tr> <td></td> <td><span id="error-qty" style="color: red" ></span></td></tr>
             <tr></tr>
+            <tr>
+                    <td><label class="qty">Number Of Available: </label></td>
+                    <td><input type="number" class="qty1" readonly id="availableQty" name="availableQuantity"></td>
+                </tr>
+                <tr></tr>
             <tr align="center">
             <td><button type="submit" class="btn3" click="submitfun()">Submit</button></td>
             <td><button type="reset" class="btn4" click="clearfun()">Clear</button></td>
@@ -152,7 +157,7 @@
         </form>
         </div>
         <div class="d1" id="UpdateNewStock">
-                <form align="center" method="POST" action="/inventory/updatestock/">
+                <form align="center" method="POST" action="/inventory/updatestock">
                     <br/>
                     <h2 class="h11">Update Sports Equipment Stock</h2>
                     <table align="center">

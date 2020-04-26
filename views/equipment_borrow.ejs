@@ -1,4 +1,4 @@
-<!-- <html>
+<html>
 
     <head>
         <link rel="stylesheet" type="text/css" href="/stylesheets/homepageSAC.css"></link>
@@ -79,9 +79,18 @@
               console.error(e);
             });
         }
+        function submitfun(){
+            const equipmentid=document.getElementById('sel1').value;
+            const studentid=document.getElementById('sid').value;
+            const qty=document.getElementById('qty1').value;
+
+            cosnole.log(equipmentid,qty,studentid);
+        }
     </script>
     </head>
     <body>
+        
+        
     <nav class="n1">
         <div>
     <header><img src="/images/DAIICT.jpg" class="img1" /></header>
@@ -97,7 +106,8 @@
                     </div>
       </nav>  
     <div class="d1">
-    <form align="center" method="POST" action="#" name="sacForm" id="sacForm">
+  
+    <form align="center" method="POST" action="/equipment" name="sacForm" id="sacForm">
         <br/>
         <h2 class="h11">SAC HOMEPAGE</h2>
         <table align="center">
@@ -105,13 +115,11 @@
             <td><label class="sel1">Type of equipment: </label></td>
             <td><select required id="sel1" class="sel" name="equipmentID">
                 <option value="">Select equipment</option>
-                <% data.stock.forEach(result=>{ %>
-                    <% if(result.NumberOfAvailable==0){ %>
-                    <option value="" aria-readonly="true"><%= result.name %></option>
-                    <%} 
-                    else{
-                    %>
-                    <option value="<%= result._id %>"><%=result.name %></option>
+                <% data.stock.forEach(result=>{%>
+                   
+                        <option value="<%= result._id %>"><%= result.name %></option>
+                   
+                    
                 <% }) %>
                 </select>
             </td>
@@ -119,22 +127,31 @@
         <tr></tr>
         <tr>
             <td><label class="qty">Quantity: </label></td>
-            <td><input type="number" class="qty1" id="qty1" onfocusout="validateForm()" required></td>
+            <td><input type="number" class="qty1" id="qty1" onkeyup="validateForm()" required name="quantity"></td>
+            
+        </tr>
+        <tr>
+            <td></td>
             <td><span id="error-qty" style="color: red" ></span></td>
         </tr>
         <tr></tr>
         <tr>
             <td><label class="sid1">Student ID:</label></td>
-            <td><input type="text" name="sid" class="sid" id="sid" onfocusout="username()"  onkeypress="return isNumberKey(event)" required></td>
+            <td><input type="text" name="studentID" class="sid" id="sid" onkeyup="username()"  onkeypress="return isNumberKey(event)" required></td>
+        </tr>
+        <tr>
+            <td></td>
             <td><span id="error-ID" style="color: red"></span></td>
         </tr>
         <tr></tr>
         <tr align="center">
-            <td colspan="2"><button value="scanqr" name="scanqr" class="btn1" id="scan" onclick="f1()">Scan QR</button></td >
+            <td colspan="2"><button value="scanqr" name="scanqr" class="btn1" id="scan" onclick="f1()">Scan QR</button>
+            <br><video id="preview"></video>
+            </td >
         </tr>
         <tr></tr>
         <tr align="center">
-        <td><button type="submit" class="btn3" >Submit</button></td>
+        <td><button type="submit" class="btn3">Submit</button></td>
         <td><button type="reset" class="btn4">Clear</button></td>
     </tr>
     </table>
@@ -143,9 +160,4 @@
     </form>
     </div>
     </body>
-    </html> -->
-    <html>
-        <body>
-            <h1>hello</h1>
-        </body>
     </html>

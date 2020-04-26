@@ -1,12 +1,11 @@
 const db=require('../dbconnection');
-
-
-const equipmentSchema=db.Schema({
+const sacSchema=db.Schema({
     equipment_id : {type:db.Schema.ObjectId,ref:"inventorytb"},
         student_id : {type:String},
         issue_date : {type:String},
-        quantity:{type:Number}
+        return_date : {type:String},
+        quantity:{type:Number},
+        loan : {type:Number}
        
 });
-
-module.exports=db.model('equipments_borrow',equipmentSchema);
+module.exports=db.model('sac_records',sacSchema);
